@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -26,4 +27,17 @@ const userSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('User', userSchema)
+userSchema.statics.isThisEmailInUse = async function (email) {
+    if (!email) throw new Error('Invalid Email')
+    try {
+        const user = await this.findOne({ email })
+        if (user) return false
+
+        return true;
+    } catch (error) {
+        console.log("error inside isThisEmailInUse method", error.message)
+    }
+}
+
+
+module.exports = mongoose.model('User', userSchema);
