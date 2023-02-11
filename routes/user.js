@@ -1,21 +1,9 @@
 const express = require('express');
+const user = require('../models/user');
 
 const router = express.Router();
+const { createUser } = require('C:/Users/Camillo/Documents/First_FullStack_Project/controllers/user.js')
 
-
-router.post('/create-user', async (req, res) => {
-    res.json(req.body);
-
-    const isNewUser = await User.isThisEmailInUse(email)
-    if (!isNewUser) return res.json({ succes: false, message: 'This email is already in use, try sign in again' })
-    const user = await User({
-        fullname: ' ',
-        email: email,
-        password: ' ',
-    })
-    await user.save()
-    res.json(user)
-
-})
+router.post('/create-user', createUser);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const User = require('C:/Users/Camillo/Documents/First_FullStack_Project/models/
 
 const app = express()
 
-app.use(express.json());
+app.use(express.json()); //middleware function
 app.use(userRouter);
 
 /* app.use((req, res, next) => {
@@ -21,16 +21,13 @@ app.use(userRouter);
 
 app.get('/test', (req, res) => {
     res.send('Hello world');
-});
-
-const email = 'john1@email.com'
-
-
-/*O '/' significa que o servidor está lendo as informações do home route*/
-app.get('/', (req, res) => {
-    res.send('Hello World')
 
 })
+app.get('/', (req, res) => {
+    res.send('Hello world');
+});
+
+/*O '/' significa que o servidor está lendo as informações do home route*/
 
 app.listen(8000, () => {
     console.log('port is listening')
